@@ -1,0 +1,155 @@
+h1 {
+     text-align: center;
+}  
+    
+table {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: medium;
+    text-align: center;
+
+    margin-left: auto;
+    margin-right: auto;    
+
+    border-spacing: 0;
+    background-color: hsl(0, 0%, 96%); /*f5f5f5*/
+
+    padding: 20px;
+}
+
+.throw1,
+.throw2,
+.throw3,
+.throw1col1
+{
+    color: whitesmoke;
+    margin: 0;
+}
+
+.throw1{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.throw2 {
+    font-size: xx-large;
+}
+
+.throw3{
+    margin-bottom: 15px;
+}
+
+.thcol1{
+    vertical-align: middle;
+    background-color: hsl(226, 22%, 57%);    
+    width: 250px;
+}
+
+.thcol2{
+    background-color: hsl(226, 26%, 44%);
+    width: 150px;
+}
+
+.thcol3{
+    background-color: hsl(227, 38%, 32%);
+    width: 150px;
+}
+
+.thcol4{
+    background-color: hsl(227, 50%, 22%);
+    width: 150px;
+}
+
+.thcol5{
+    background-color: hsl(228, 67%, 13%);
+    width: 150px;
+}
+
+
+th:first-child{
+    border-radius: 15px 0px 0px 0px;
+}
+
+th:last-child{
+    border-radius: 0px 15px 0px 0px;
+}
+
+
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+
+table tbody tr td:first-child{
+    text-align: left;   
+    padding-left: 20px;
+}
+
+table tbody td{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* 
+cells[1,1] = dbdbdb  
+cells[2,1] = e7e7e7
+cells[1,2] = ececed
+cells[2,2] = f3f3f3
+*/
+
+table tbody tr:nth-child(2n+1) td:nth-child(2n+1){
+    background-color: hsl(0, 0%, 86%); /*dbdbdb*/
+}
+
+table tbody tr:nth-child(2n+1) td:nth-child(2n){
+    background-color: hsl(0, 0%, 91%); /*e7e7e7*/
+}
+
+table tbody tr:nth-child(2n) td:nth-child(2n+1){
+    background-color: hsl(240, 3%, 93%); /*ececed*/
+}
+table tbody tr:nth-child(2n) td:nth-child(2n){
+    background-color: hsl(0, 0%, 95%);  /*f3f3f3*/
+}
+
+
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+
+tfoot td:first-child{
+    border-radius: 0px 0px 0px 15px;
+}
+
+tfoot td:last-child{
+    border-radius: 0px 0px 15px 0px;
+}
+
+table tfoot tr:nth-child(2n+1) td:nth-child(2n+1){
+    background-color: hsl(0, 0%, 86%); /*dbdbdb*/
+}
+table tfoot tr:nth-child(2n+1) td:nth-child(2n){
+    background-color: hsl(0, 0%, 91%); /*e7e7e7*/
+}
+
+.ButtonStart{
+    margin: 10px 20px;
+    width: 100px;
+    height: 45px;
+}
+
+.alert {
+    position: relative;
+    top: 10;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin: 10px;
+    line-height: 1.8;
+    border-radius: 5px;
+    cursor: hand;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-weight: 400;
+  }

@@ -1,0 +1,31 @@
+.styleNadpis{
+    padding-left: 25px;
+}
+
+.styleList {
+    list-style-type: none;
+}
+
+ul {
+    list-style-type: upper-roman;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight:bold;
+    padding-left: 4em;
+}
+
+ul li span{
+    font-weight:normal;
+    color: cornflowerblue;
+}
+
+.styleUl_uroven1 {
+    list-style-type: decimal;
+    font-weight:bold;
+    padding-left: 2em;
+}
+
+.styleUl_uroven2 {
+    list-style-type: lower-alpha;
+    font-weight:bold;
+    padding-left: 2em;
+}

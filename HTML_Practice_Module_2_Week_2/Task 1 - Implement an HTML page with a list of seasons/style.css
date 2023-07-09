@@ -1,0 +1,27 @@
+.styleNadpis{
+    padding-left: 25px;
+}
+
+.styleList {
+    list-style-type: none;
+}
+
+.styleZima {
+    list-style-image: url("icons/winter_16.png");
+    padding-left: 50px;
+}
+
+.styleJaro {
+    list-style-image: url("icons/spring_16.png");
+    padding-left: 50px;
+}
+
+.styleLeto {
+    list-style-image: url("icons/summer_16.png");
+    padding-left: 50px;
+}
+
+.stylePodzim {
+    list-style-image: url("icons/autumn_16.png");
+    padding-left: 50px;
+}
