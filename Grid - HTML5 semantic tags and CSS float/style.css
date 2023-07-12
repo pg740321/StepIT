@@ -1,0 +1,134 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
+    font-weight: bold;
+
+    color: white;
+}
+
+.containerall {
+    display: grid;
+    height: 800px;
+    
+    grid-template-columns: 100%; 
+    grid-template-rows: 3fr 3fr 15fr 3fr;
+
+    grid-template-areas:
+        "header"
+        "menu"
+        "mainsection"
+        "footer";
+}
+
+.containerheader {
+    background-color: #8b2e59;
+    grid-area: header;
+    margin: 5px;
+    padding: 10px;
+}
+
+.containermenu {
+    background-color: #8b2e59;
+    grid-area: menu;
+    margin: 5px;
+    padding: 10px;
+}
+
+.containermain{
+    grid-area: mainsection;
+    margin: 5px;
+ 
+    display: grid;
+    grid-template-columns: 2fr 5fr 1fr;
+    grid-template-rows: 100%;
+    grid-template-areas:
+        "asside  section asside3";   
+}
+
+.containercol1{
+    grid-area: containermain aside;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 35% 50%;
+    grid-template-areas:
+        "asside1"
+        "asside2";   
+}  
+
+.containercol2{ 
+    grid-area: containermain section;
+    background-color: palevioletred;
+    margin: 0 5px 0 5px;
+    padding: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 45% 45%;
+    grid-template-areas:
+        "sectiontext"
+        "section1"
+        "section2";   
+}
+
+.containercol3{
+    grid-area: containermain aside3;
+    background-color: #ae5981;
+
+    justify-items: center;
+    height: 80%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 80%;
+    grid-template-areas:
+        "asside3";   
+}  
+
+
+.aside1{
+    grid-area: containercol1 aside1;
+    background-color: #ae5981;
+    padding: 10px;
+}
+
+.aside2{
+    grid-area: containercol1 aside2;
+    background-color: #ae5981;
+    margin: 5px 0 0 0;
+    padding: 10px;
+}
+
+.section1{
+    grid-area: containercol1 section1;
+    margin: 15px;
+    padding: 10px;
+    background-color: #d490b0;
+ }
+
+ .section2{
+    grid-area: containercol1 section2;
+    margin: 15px;
+    padding: 10px;
+    background-color: #d490b0;
+ }
+
+ .sectiontext
+ {
+    grid-area: containercol1 sectiontext;
+    padding: 10px;
+ }
+
+ .aside3{
+    /* background-color: #ae5981; */
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    text-align: center; 
+} 
+
+.containerfooter {
+    background-color: #8b2e59;
+    grid-area: footer;
+    margin: 5px;
+    padding: 10px;
+}
+
