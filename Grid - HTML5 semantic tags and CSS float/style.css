@@ -20,23 +20,34 @@ body {
         "footer";
 }
 
+.containermarg{
+    margin: 5px;
+}
+
+.containerpad{
+    padding: 10px;
+}
+
+.sectionpad{
+    padding: 10px;
+}
+
+.sectionmarg{
+    margin: 10px;
+}
+
 .containerheader {
     background-color: #8b2e59;
     grid-area: header;
-    margin: 5px;
-    padding: 10px;
 }
 
 .containermenu {
     background-color: #8b2e59;
     grid-area: menu;
-    margin: 5px;
-    padding: 10px;
 }
 
 .containermain{
     grid-area: mainsection;
-    margin: 5px;
  
     display: grid;
     grid-template-columns: 2fr 5fr 1fr;
@@ -58,8 +69,7 @@ body {
 .containercol2{ 
     grid-area: containermain section;
     background-color: palevioletred;
-    margin: 0 5px 0 5px;
-    padding: 10px;
+    margin: 0 10px 0 10px;
 
     display: grid;
     grid-template-columns: 1fr;
@@ -88,38 +98,30 @@ body {
 .aside1{
     grid-area: containercol1 aside1;
     background-color: #ae5981;
-    padding: 10px;
 }
 
 .aside2{
     grid-area: containercol1 aside2;
     background-color: #ae5981;
-    margin: 5px 0 0 0;
-    padding: 10px;
+    margin: 10px 0 0 0;
 }
 
 .section1{
     grid-area: containercol1 section1;
-    margin: 15px;
-    padding: 10px;
     background-color: #d490b0;
  }
 
  .section2{
     grid-area: containercol1 section2;
-    margin: 15px;
-    padding: 10px;
     background-color: #d490b0;
  }
 
  .sectiontext
  {
     grid-area: containercol1 sectiontext;
-    padding: 10px;
  }
 
  .aside3{
-    /* background-color: #ae5981; */
     writing-mode: vertical-lr;
     text-orientation: upright;
     text-align: center; 
@@ -128,7 +130,5 @@ body {
 .containerfooter {
     background-color: #8b2e59;
     grid-area: footer;
-    margin: 5px;
-    padding: 10px;
 }
 
