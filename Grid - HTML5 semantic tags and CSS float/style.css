@@ -2,13 +2,15 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: large;
     font-weight: bold;
-
     color: white;
+
 }
 
 .containerall {
     display: grid;
     height: 800px;
+    padding: 20px;
+    /* background-color: antiquewhite; */
     
     grid-template-columns: 100%; 
     grid-template-rows: 3fr 3fr 15fr 3fr;
@@ -82,18 +84,16 @@ body {
 
 .containercol3{
     grid-area: containermain aside3;
-    background-color: #ae5981;
-
     justify-items: center;
+    background-color: #ae5981; 
     height: 80%;
 
     display: grid;
+
     grid-template-columns: 1fr;
-    grid-template-rows: 80%;
     grid-template-areas:
         "asside3";   
 }  
-
 
 .aside1{
     grid-area: containercol1 aside1;
@@ -122,6 +122,8 @@ body {
  }
 
  .aside3{
+    grid-area: containercol3 aside3;
+
     writing-mode: vertical-lr;
     text-orientation: upright;
     text-align: center; 
