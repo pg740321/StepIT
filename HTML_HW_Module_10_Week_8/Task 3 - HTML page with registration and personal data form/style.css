@@ -1,0 +1,166 @@
+.edit {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-bottom-width: 2px;
+    border-bottom-color: silver;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: medium;
+}
+
+@media only screen and (min-width: 981px) {
+    .grid {
+        display: grid;
+
+        grid-template-columns: 1fr 20fr 20fr 20fr 20fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 2fr 1fr;
+
+        grid-template-areas:
+            "regform regform regform persondet persondet"
+            "imguser username username firstname lastname"
+            "imgemail email email gender datum"
+            "imgpass password confpass . ."
+            "checkbox checkbox checkbox checkbox checkbox"
+            ". . . . submit";
+    }
+}
+
+@media only screen and (max-width: 980px) and (min-width: 601px) {
+
+    .grid {
+        display: grid;
+
+        grid-template-columns: 1fr 20fr 20fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 0.5fr 1fr 1fr 1fr 2fr 1fr;
+
+        grid-template-areas:
+            "regform regform regform"
+            "imguser username username"
+            "imgemail email email"
+            "imgpass password confpass"
+            ". . ."
+            "persondet persondet persondet"
+            "firstname firstname lastname"
+            "gender gender datum"
+            "checkbox checkbox checkbox"
+            ". . submit";
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .grid {
+        display: grid;
+
+        grid-template-columns: 1fr 20fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 0.5fr 1fr 1fr 1fr 1fr 1fr 0.5fr 2fr 1fr;
+
+        grid-template-areas:
+            "regform regform"
+            "imguser username"
+            "imgemail email "
+            "imgpass password "
+            ". confpass"
+            ". ."
+            "persondet persondet"
+            "firstname firstname"
+            "lastname lastname"
+            "gender gender"
+            "datum datum"
+            ". ."
+            "checkbox checkbox"
+            ". submit";
+    }
+}
+
+
+.regform {
+    grid-area: regform;
+}
+
+.username {
+    grid-area: username;
+}
+
+.email {
+    grid-area: email;
+}
+
+.password {
+    grid-area: password;
+}
+
+.confpass {
+    grid-area: confpass;
+}
+
+.persondet {
+    grid-area: persondet;
+    padding-left: 10px;
+}
+
+.firstname {
+    grid-area: firstname;
+}
+
+.lastname {
+    grid-area: lastname;
+}
+
+.gender {
+    grid-area: gender;
+}
+
+.datum {
+    grid-area: datum;
+}
+
+.specoff {
+    margin-top: 10px;
+}
+
+.agree {
+    margin-top: 10px;
+}
+
+.checkbox {
+    grid-area: checkbox;
+    align-self: center;
+}
+
+.submit {
+    grid-area: submit;
+}
+
+.form {
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5)
+}
+
+.image {
+    /* padding-top: 12px;  */
+    align-self: center;
+}
+
+.editfield {
+    margin: 10px;
+}
+
+.submit {
+    background-color: darkgreen;
+    color: white;
+
+    margin-right: 10px;
+
+    align-self: center;
+    justify-self: end;
+
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
+
+    width: 140px;
+    height: 40px;
+    border-radius: 5px;
+}

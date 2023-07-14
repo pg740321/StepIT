@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form action="result.html" method="GET" class="form">
+
+        <div class="grid">
+            <h2 class="regform">Registration form</h2>
+
+            <img for="username" class="image imguser" src="icons_hw_module_10\username.png" alt="User Name" />
+            <input type="text" class="edit editfield username" placeholder="User Name" name="username">
+
+            <img for="email" class="image imgemail" src="icons_hw_module_10\email.png" alt="Email addres" />
+            <input type="email" class="edit editfield email" placeholder="Email addres" name="email">
+
+            <img for="password" class="image imgpass" src="icons_hw_module_10\Pswd.png" alt="Password" />
+            <input type="password" class="editfield password edit" id="password" placeholder="Password" name="password">
+
+            <input type="password" class="edit editfield confpass" id="confpassword" placeholder="Confirm password"
+                name="Confpassword">
+
+            <h2 class="persondet">Personal details</h2>
+
+            <input type="text" class="edit editfield firstname" placeholder="First Name" name="firstname">
+
+            <input type="text" class="edit editfield lastname" placeholder="Last Name" name="lastname">
+
+            <select name="gender" id="lang" class="edit editfield gender">
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
+
+            <input type="date" class="edit editfield datum" placeholder="date" name="date">
+
+            <div class="checkbox">
+                <div class="specoff">
+                    <input type="checkbox" name="specoff" id="specoff">
+                    <label for="specoff">I want to receive news and special offers</label>
+                </div>
+
+                <div class="agree">
+                    <input type="checkbox" name="agree" id="agree">
+                    <label for="agree">I agree with the Terms and Conditions</label>
+                </div>
+            </div>
+
+            <input type="submit" class="submit" value="Submit" />
+        </div>
+    </form>
+</body>
+
+</html>
