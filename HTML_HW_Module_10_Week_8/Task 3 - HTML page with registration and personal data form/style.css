@@ -9,7 +9,24 @@
     font-size: medium;
 }
 
-@media only screen and (min-width: 981px) {
+.form {
+    margin    : 20px 10px 20px 10px;
+    padding   : 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    max-width : 1250px;
+}
+
+
+/* Centrovani formulare */
+@media only screen and (min-width: 1250px) {    
+    .form {
+        margin: 20px auto 20px auto;
+        width: 1170px; 
+      }
+}
+
+@media only screen and (min-width: 981px)
+{
     .grid {
         display: grid;
 
@@ -73,7 +90,6 @@
     }
 }
 
-
 .regform {
     grid-area: regform;
 }
@@ -130,12 +146,6 @@
 
 .submit {
     grid-area: submit;
-}
-
-.form {
-    margin: 20px;
-    padding: 20px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5)
 }
 
 .image {
