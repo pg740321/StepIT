@@ -1,7 +1,6 @@
-.h1{
+.h1 {
     align-items: center;
 }
-
 
 .btn-group-vertical>.btn {
     height: 1em;
@@ -11,52 +10,117 @@
 .form {
     margin: 20px 10px 20px 10px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-    max-width: 1350px;
 }
 
-
-.grid {
+.info {
     display: grid;
-    height: 700px;
-
-    grid-template-columns: 80% 20%;  
-    grid-template-rows: 1fr;
-
-    grid-template-areas:
-    "image info"
-/*
-    "image . faze1 . priklad"
-        "image . faze2 . priklad"
-        "image . speed . priklad"
-        "image . checkbox . priklad"
-        "image . btnAnim . . "*/
-}
-
-.info{
-    display: grid;
-    height: 700px;
-
     background-color: lightgray;
-
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-
-    grid-template-columns: 60% 40%;  
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-
-    grid-template-areas:
-    "faze1 priklad"
-    "faze2 priklad"
-    "speed priklad"
-    "checkbox priklad"
-    "btnAnim btnAnim"
 }
 
-.image{
+@media only screen and (min-width: 0px) and (max-width: 624px) {
+    .form {
+        max-width: 624px;
+        min-width: 250px;
+
+    }
+
+    .grid {
+        display: grid;
+        height: 300px;
+
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr;
+
+        grid-template-areas:
+            "image"
+            "info"
+    }
+
+    .info {
+        grid-template-columns: 60% 40%;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+
+        grid-template-areas:
+            "faze1 priklad"
+            "faze2 priklad"
+            "speed priklad"
+            "checkbox priklad"
+            "btnAnim btnAnim"
+    }
+}
+
+@media only screen and (min-width: 624px) and (max-width: 764px) {
+    .form {
+        max-width: 764px;
+    }
+
+    .grid {
+        display: grid;
+        height: 500px;
+
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr;
+
+        grid-template-areas:
+            "image"
+            "info"
+    }
+
+    .info {
+        grid-template-columns: 60% 40%;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+
+        grid-template-areas:
+            "faze1 priklad"
+            "faze2 priklad"
+            "speed priklad"
+            "checkbox priklad"
+            "btnAnim btnAnim"
+    }
+}
+
+@media only screen and (min-width: 764px) and (max-width: 4096px) {
+    .form {
+        max-width: 1200px;
+    }
+
+    .grid {
+        display: grid;
+        height: 700px;
+
+        grid-template-columns: 80% 20%;
+        grid-template-rows: 1fr;
+
+        grid-template-areas:
+            "image info"
+    }
+
+    .info {
+        margin: 20px 10px 20px 10px;
+        height: 660px;
+
+        grid-template-columns: 98%;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+        grid-template-areas:
+            "faze1"
+            "faze2"
+            "speed"
+            "checkbox"
+            "priklad"
+            "btnAnim"
+    }
+
+}
+
+
+.image {
     grid-area: image;
     justify-self: stretch;
 }
 
-.imageCanvas{
+.imageCanvas {
     justify-self: stretch;
 }
 
@@ -88,40 +152,42 @@
     align-self: center;
 }
 
-.example{
+.example {
     grid-area: priklad;
 }
 
-.btnExample1{
+.btnExample1 {
     grid-area: priklad1;
-    display: block;
 }
 
-.btnExample2{
+.btnExample2 {
     grid-area: priklad2;
 }
 
-.btnExample3{
+.btnExample3 {
     grid-area: priklad3;
 }
 
-.btnExample4{
+.btnExample4 {
     grid-area: priklad4;
 }
 
-.btnExample{
-    display: block;
+.btnExample {
     background-color: darkred;
     color: yellow;
 
-    margin-top: 25px;
+    vertical-align: middle;
+    align-self: center;
+    justify-self: center;
+
+    margin-top: 15px;
     margin-right: 5px;
     margin-left: 5px;
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: medium;
 
-    width: 90%;
+    width: 95%;
     height: 40px;
     border-radius: 5px;
 }
@@ -140,9 +206,9 @@
     justify-self: center;
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: large;
+    font-size: medium;
 
-    width: 86%;
+    width: 95%;
     height: 40px;
     border-radius: 5px;
 

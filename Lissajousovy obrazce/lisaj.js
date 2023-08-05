@@ -62,7 +62,6 @@ function onRotateXclick() {
 
 function onRotateYclick() {
     let checkbox = document.querySelector("#rotateY");
-
     rotateY = checkbox.checked;
 }
 
@@ -80,28 +79,33 @@ function onbtnanimaceclick() {
     }
 }
 
-function onbtnExample1click(){
-    drawImage(46,69, uhelvalX, uhelvalY);
+function onbtnExample1click() {
+    drawImage(46, 69, uhelvalX, uhelvalY);
 }
 
-function onbtnExample2click(){
-    drawImage(98,49, uhelvalX, uhelvalY);
+function onbtnExample2click() {
+    drawImage(98, 49, uhelvalX, uhelvalY);
 }
 
-function onbtnExample3click(){
-    drawImage(52,65, uhelvalX, uhelvalY);
+function onbtnExample3click() {
+    drawImage(52, 65, uhelvalX, uhelvalY);
 }
 
-function onbtnExample4click(){
-    drawImage(206,46, uhelvalX, uhelvalY);
+function onbtnExample4click() {
+    drawImage(206, 46, uhelvalX, uhelvalY);
 }
 
 function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
     let i = 0;
 
     let form = document.querySelector("#form");
-
-    ctx.canvas.width = Math.trunc(form.clientWidth * 0.8);
+  
+    if (form.clientWidth > 728) {
+        ctx.canvas.width = Math.trunc(form.clientWidth * 0.8);
+    }
+    else {
+        ctx.canvas.width = Math.trunc(form.clientWidth*0.98);
+    }
     ctx.canvas.height = form.clientHeight;
 
     if (paramfaze1 !== faze1val) {
@@ -138,9 +142,8 @@ function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
     while (i < 720) {
         i = i + .5;
 
-        x = Math.trunc(Math.sin(i * paramfaze1 + paramuhelX) * posunX + posunX + 10);
-
-        y = Math.trunc(Math.cos(i * paramfaze2 + paramuhelY) * posunY + posunY + 10);
+        x = Math.trunc(Math.sin(i * paramfaze1 + paramuhelY) * posunX + posunX + 10);
+        y = Math.trunc(Math.cos(i * paramfaze2 + paramuhelX) * posunY + posunY + 10);
 
         if (i <= .2) ctx.moveTo(x, y)
         else
@@ -152,5 +155,9 @@ function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
 }
 
 window.onload = function () {
+    drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
+};
+
+window.onresize = function () {
     drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
 };
