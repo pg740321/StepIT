@@ -11,8 +11,8 @@ let id;
 let posunX = 0;
 let posunY = 0;
 
-let c = document.getElementById("myCanvas");
-let ctx = c.getContext("2d");
+let canvas = document.getElementById("myCanvas");
+let contex = canvas.getContext("2d");
 
 let inputBox = document.querySelector("#faze1");
 inputBox.addEventListener("input", function () {
@@ -99,14 +99,14 @@ function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
     let i = 0;
 
     let form = document.querySelector("#form");
-  
+
     if (form.clientWidth > 728) {
-        ctx.canvas.width = Math.trunc(form.clientWidth * 0.8);
+        contex.canvas.width = Math.trunc(form.clientWidth * 0.8);
     }
     else {
-        ctx.canvas.width = Math.trunc(form.clientWidth*0.98);
+        contex.canvas.width = Math.trunc(form.clientWidth * 0.98);
     }
-    ctx.canvas.height = form.clientHeight;
+    contex.canvas.height = form.clientHeight;
 
     if (paramfaze1 !== faze1val) {
         faze1val = paramfaze1;
@@ -130,14 +130,14 @@ function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
         uhelvalY = paramuhelY;
     }
 
-    ctx.lineWidth = 0.2;
-    ctx.strokeStyle = 'green';
+    contex.lineWidth = 0.2;
+    contex.strokeStyle = 'green';
 
-    ctx.beginPath();
-    ctx.clearRect(0, 0, c.clientWidth, c.clientHeight);
+    contex.beginPath();
+    contex.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
 
-    posunX = Math.trunc((c.clientWidth - 20) / 2);
-    posunY = Math.trunc((c.clientHeight - 20) / 2);
+    posunX = Math.trunc((canvas.clientWidth - 20) / 2);
+    posunY = Math.trunc((canvas.clientHeight - 20) / 2);
 
     while (i < 720) {
         i = i + .5;
@@ -145,13 +145,13 @@ function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
         x = Math.trunc(Math.sin(i * paramfaze1 + paramuhelY) * posunX + posunX + 10);
         y = Math.trunc(Math.cos(i * paramfaze2 + paramuhelX) * posunY + posunY + 10);
 
-        if (i <= .2) ctx.moveTo(x, y)
+        if (i <= .2) contex.moveTo(x, y)
         else
-            ctx.lineTo(x, y);
+            contex.lineTo(x, y);
     }
 
-    ctx.stroke();
-    ctx.closePath();
+    contex.stroke();
+    contex.closePath();
 }
 
 window.onload = function () {
