@@ -16,21 +16,20 @@
     display: grid;
     background-color: lightgray;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    align-items: center;
 }
 
-@media only screen and (min-width: 0px) and (max-width: 624px) {
+@media only screen and (min-width: 397px) {
     .form {
-        max-width: 624px;
-        min-width: 250px;
-
+        max-width: 960px;
     }
 
     .grid {
         display: grid;
-        height: 300px;
+        height: 400px;
 
         grid-template-columns: 100%;
-        grid-template-rows: 1fr;
+        grid-template-rows: 1fr 1fr;
 
         grid-template-areas:
             "image"
@@ -50,17 +49,17 @@
     }
 }
 
-@media only screen and (min-width: 625px) and (max-width: 880px) {
+@media only screen and (min-width: 760px) {
     .form {
-        max-width: 880px;
+        max-width: 1200px;
     }
 
     .grid {
         display: grid;
-        height: 500px;
+        height: 600px;
 
         grid-template-columns: 100%;
-        grid-template-rows: 1fr;
+        grid-template-rows: 1fr 1fr;
 
         grid-template-areas:
             "image"
@@ -80,7 +79,7 @@
     }
 }
 
-@media only screen and (min-width: 880px) and (max-width: 4096px) {
+@media only screen and (min-width: 1000px) {
     .form {
         max-width: 1200px;
     }
@@ -97,7 +96,7 @@
     }
 
     .info {
-        margin: 20px 10px 20px 10px;
+        margin: 20px;
         height: 660px;
 
         grid-template-columns: 98%;
@@ -117,11 +116,6 @@
 
 .image {
     grid-area: image;
-    justify-self: stretch;
-}
-
-.imageCanvas {
-    justify-self: stretch;
 }
 
 .editalign{

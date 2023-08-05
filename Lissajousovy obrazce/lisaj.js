@@ -98,15 +98,11 @@ function onbtnExample4click() {
 function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
     let i = 0;
 
-    let form = document.querySelector("#form");
-
-    if (form.clientWidth > 728) {
-        contex.canvas.width = Math.trunc(form.clientWidth * 0.8);
-    }
-    else {
-        contex.canvas.width = Math.trunc(form.clientWidth * 0.98);
-    }
-    contex.canvas.height = form.clientHeight;
+    let widthc = document.querySelector('.grid').children[0].clientWidth;
+    let heightc = document.querySelector('#form').children[0].clientHeight;
+    
+    contex.canvas.width = widthc;
+    contex.canvas.height = heightc;   
 
     if (paramfaze1 !== faze1val) {
         faze1val = paramfaze1;
@@ -134,10 +130,10 @@ function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
     contex.strokeStyle = 'green';
 
     contex.beginPath();
-    contex.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    contex.clearRect(0, 0, widthc, heightc);
 
-    posunX = Math.trunc((canvas.clientWidth - 20) / 2);
-    posunY = Math.trunc((canvas.clientHeight - 20) / 2);
+    posunX = Math.trunc((widthc - 20) / 2);
+    posunY = Math.trunc((heightc - 20) / 2);
 
     while (i < 720) {
         i = i + .5;
