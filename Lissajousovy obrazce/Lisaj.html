@@ -14,23 +14,22 @@
     <div class="form" id="form">
 
         <div class="grid">
-
             <div class="image">
                 <canvas class="imageCanvas" id="myCanvas"></canvas>
             </div>
 
             <div class="info">
-                <div class="faze1">
+                <div class="faze1 editalign">
                     <label for="faze1">Faze 1:</label>
                     <input id="faze1" type="number" step="1" max="360" min="0" value="42">
                 </div>
 
-                <div class="faze2">
+                <div class="faze2 editalign">
                     <label for="faze2">Faze 2:</label>
                     <input id="faze2" type="number" step="1" max="360" min="0" value="105">
                 </div>
 
-                <div class="rychlost">
+                <div class="rychlost editalign">
                     <label for="rychlost">Rychlost animace <br /> (zprodleni v ms):</label>
                     <input id="rychlost" type="number" step="1" max="500" min="0" value="50">
                 </div>
@@ -38,33 +37,31 @@
                 <button id="btnanimace" class="btnanimace" onclick="onbtnanimaceclick()">Spust animaci</button>
 
                 <div class="checkbox">
-                    <div class="rotateX">
+                    <div class="rotateX editalign">
                         <input type="checkbox" checked="true" name="rotateX" id="rotateX" onclick="onRotateXclick()">
                         <label for="rotateX">Rotace v ose X</label>
                     </div>
 
-                    <div class="rotateY">
+                    <div class="rotateY editalign">
                         <input type="checkbox" checked="true" name="rotateY" id="rotateY" onclick="onRotateYclick()">
                         <label for="rotateY">Rotace v ose Y</label>
                     </div>
-
-
-                    <div class="example">
-                        <button id="btnExample1" class="btnExample1 btnExample" onclick="onbtnExample1click()">Ukázka
-                            1</button>
-                        <button id="btnExample2" class="btnExample2 btnExample" onclick="onbtnExample2click()">Ukázka
-                            2</button>
-                        <button id="btnExample3" class="btnExample3 btnExample" onclick="onbtnExample3click()">Ukázka
-                            3</button>
-                        <button id="btnExample4" class="btnExample4 btnExample" onclick="onbtnExample4click()">Ukázka
-                            4</button>
-                    </div>
                 </div>
 
-            </div>
 
-            <script src="lisaj.js"></script>
+                <div class="example">
+                    <button id="btnExample1" class="btnExample1 btnExample" onclick="onbtnExample1click()">Ukázka
+                        1</button>
+                    <button id="btnExample2" class="btnExample2 btnExample" onclick="onbtnExample2click()">Ukázka
+                        2</button>
+                    <button id="btnExample3" class="btnExample3 btnExample" onclick="onbtnExample3click()">Ukázka
+                        3</button>
+                    <button id="btnExample4" class="btnExample4 btnExample" onclick="onbtnExample4click()">Ukázka
+                        4</button>
+                </div>
+            </div>
         </div>
+        <script src="lisaj.js"></script>
     </div>
 </body>
 

@@ -50,9 +50,9 @@
     }
 }
 
-@media only screen and (min-width: 624px) and (max-width: 764px) {
+@media only screen and (min-width: 625px) and (max-width: 880px) {
     .form {
-        max-width: 764px;
+        max-width: 880px;
     }
 
     .grid {
@@ -80,7 +80,7 @@
     }
 }
 
-@media only screen and (min-width: 764px) and (max-width: 4096px) {
+@media only screen and (min-width: 880px) and (max-width: 4096px) {
     .form {
         max-width: 1200px;
     }
@@ -124,32 +124,26 @@
     justify-self: stretch;
 }
 
-.faze1 {
+.editalign{
     margin: 10px;
     align-self: center;
-    grid-area: faze1;
     vertical-align: middle;
+}
+
+.faze1 {
+    grid-area: faze1;
 }
 
 .faze2 {
-    margin: 10px;
-    align-self: center;
     grid-area: faze2;
-    vertical-align: middle;
 }
 
 .rychlost {
-    margin: 10px;
     grid-area: speed;
-    vertical-align: middle;
-    align-self: center;
 }
 
 .checkbox {
-    margin: 10px;
     grid-area: checkbox;
-    vertical-align: middle;
-    align-self: center;
 }
 
 .example {
