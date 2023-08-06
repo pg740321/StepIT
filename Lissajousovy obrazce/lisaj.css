@@ -1,14 +1,14 @@
-.h1 {
-    align-items: center;
-}
-
 .btn-group-vertical>.btn {
     height: 1em;
     padding: 0px 6px 13px;
 }
 
+.nadpis {
+    text-align: center;
+}
+
 .form {
-    margin: 20px 10px 20px 10px;
+    margin: 20px auto 20px auto;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
@@ -45,6 +45,7 @@
             "faze2 priklad"
             "speed priklad"
             "checkbox priklad"
+            ". priklad"
             "btnAnim btnAnim"
     }
 }
@@ -75,6 +76,7 @@
             "faze2 priklad"
             "speed priklad"
             "checkbox priklad"
+            ". priklad"
             "btnAnim btnAnim"
     }
 }
@@ -118,7 +120,7 @@
     grid-area: image;
 }
 
-.editalign{
+.editalign {
     margin: 10px;
     align-self: center;
     vertical-align: middle;
@@ -142,22 +144,6 @@
 
 .example {
     grid-area: priklad;
-}
-
-.btnExample1 {
-    grid-area: priklad1;
-}
-
-.btnExample2 {
-    grid-area: priklad2;
-}
-
-.btnExample3 {
-    grid-area: priklad3;
-}
-
-.btnExample4 {
-    grid-area: priklad4;
 }
 
 .btnExample {
@@ -185,7 +171,7 @@
     grid-area: btnAnim;
 
     background-color: darkblue;
-    color: white;
+    color: lightgrey;
 
     margin: 10px;
 
@@ -195,6 +181,7 @@
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: medium;
+    font-weight: bold;
 
     width: 95%;
     height: 40px;
