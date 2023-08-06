@@ -6,7 +6,7 @@ let rychlostval = 50;
 let rotateX = true;
 let rotateY = true;
 
-let id;
+let idAnimace;
 
 let posunX = 0;
 let posunY = 0;
@@ -17,7 +17,19 @@ let contex = canvas.getContext("2d");
 let inputBoxFaze1 = document.querySelector("#faze1");
 let inputBoxFaze2 = document.querySelector("#faze2");
 let inputBoxRychlost = document.querySelector("#rychlost");
+let btnAnimace = document.querySelector("#btnanimace");
 
+const animaceTxtRun = "Spust animaci";
+const animaceTxtStop = "Zastav animaci";
+const animaceTxtDisabled = "Animace zakazana";
+
+window.onload = function () {
+    drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
+};
+
+window.onresize = function () {
+    drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
+};
 
 if (inputBoxFaze1 !== null) {
     inputBoxFaze1.addEventListener("input", function () {
@@ -37,13 +49,41 @@ if (inputBoxFaze2 !== null) {
     inputBoxRychlost.addEventListener("input", function () {
         rychlostval = Number(this.value);
 
-        if (id !== null) {
-            clearInterval(id);
-            id = setInterval(animace, rychlostval);
+        if (idAnimace !== null) {
+            clearInterval(idAnimace);
+            idAnimace = setInterval(animace, rychlostval);
         }
 
         drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
     });
+}
+
+function zakazAnimaci() {
+    stopAnimation();
+    btnAnimace.disabled = true;
+    btnAnimace.textContent = animaceTxtDisabled;
+}
+
+function povolAnimaci() {
+    btnAnimace.disabled = false;
+    if (idAnimace == null) {
+        btnAnimace.textContent = animaceTxtRun;
+    }
+}
+
+function stopAnimation() {
+    if (idAnimace !== null) {
+        clearInterval(idAnimace);
+        btnAnimace.textContent = animaceTxtRun;
+        idAnimace = null
+    }
+}
+
+function startAnimation() {
+    if (idAnimace == null) {
+        idAnimace = setInterval(animace, rychlostval);
+        btnAnimace.textContent = animaceTxtStop;
+    }
 }
 
 function animace() {
@@ -63,7 +103,6 @@ function animace() {
 
 function onRotateXclick() {
     let checkbox = document.querySelector("#rotateX");
-
     rotateX = checkbox.checked;
 }
 
@@ -72,17 +111,12 @@ function onRotateYclick() {
     rotateY = checkbox.checked;
 }
 
-function onbtnanimaceclick() {
-    let btnanimace = document.querySelector("#btnanimace");
-
-    if (id == null) {
-        id = setInterval(animace, rychlostval);
-        btnanimace.textContent = 'Zastav animaci';
+function onbtnAnimaceclick() {
+    if (idAnimace == null) {
+        startAnimation()
     }
     else {
-        clearInterval(id);
-        btnanimace.textContent = 'Spust animaci';
-        id = null
+        stopAnimation()
     }
 }
 
@@ -132,6 +166,9 @@ function wrapText(context, text, x, y, line_width, line_height) {
 }
 
 function drawErrorMessage(errormessage) {
+
+    zakazAnimaci();
+
     contex.beginPath();
     contex.clearRect(0, 0, contex.canvas.width, contex.canvas.height);
     contex.fillStyle = "red";
@@ -180,26 +217,22 @@ function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
         faze1val = paramfaze1;
 
         let inputBox = document.querySelector("#faze1");
+        inputBox.value = paramfaze1;
+
         if (inputBox == null) {
             drawErrorMessage("Identifikator \"#faze1\" nebyl nalezen ");
             return;
         }
-        else {
-            inputBox.value = faze1val;
-        }
     }
-
 
     if (paramfaze2 !== faze2val) {
         faze2val = paramfaze2;
 
         let inputBox = document.querySelector("#faze2");
+        inputBox.value = paramfaze2;
         if (inputBox == null) {
             drawErrorMessage("Identifikator \"#faze2\" nebyl nalezen ");
             return;
-        }
-        else {
-            inputBox.value = faze2val;
         }
     }
 
@@ -236,12 +269,6 @@ function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
 
     contex.stroke();
     contex.closePath();
+
+    povolAnimaci();
 }
-
-window.onload = function () {
-    drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
-};
-
-window.onresize = function () {
-    drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
-};
