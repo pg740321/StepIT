@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>Lissajousovy obrazce</title>
+    <link rel="stylesheet" type="text/css" href="lisaj.css">
+
+    <style>
+        .btn-group-vertical>.btn {
+            height: 1em;
+            padding: 0px 6px 13px;
+        }
+
+        .nadpis {
+            text-align: center;
+        }
+
+        .form {
+            margin: 20px auto 20px auto;
+            box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        .info {
+            display: grid;
+            background-color: lightgray;
+            box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+            align-items: center;
+        }
+
+        @media only screen and (min-width: 397px) {
+            .form {
+                max-width: 960px;
+            }
+
+            .grid {
+                display: grid;
+                height: 280px;
+
+                grid-template-columns: 100%;
+                grid-template-rows: 1fr 1fr;
+
+                grid-template-areas:
+                    "image"
+                    "info"
+            }
+
+            .info {
+                grid-template-columns: 60% 40%;
+                grid-template-rows: 1fr 1fr 1fr 1fr 0.2fr 1fr;
+
+                grid-template-areas:
+                    "faze1 priklad"
+                    "faze2 priklad"
+                    "speed priklad"
+                    "checkbox priklad"
+                    ". priklad"
+                    "btnAnim btnAnim"
+            }
+        }
+
+        @media only screen and (min-width: 760px) {
+            .form {
+                max-width: 1200px;
+            }
+
+            .grid {
+                display: grid;
+                height: 500px;
+
+                grid-template-columns: 100%;
+                grid-template-rows: 1fr 1fr;
+
+                grid-template-areas:
+                    "image"
+                    "info"
+            }
+
+            .info {
+                grid-template-columns: 60% 40%;
+                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+                grid-template-areas:
+                    "faze1 priklad"
+                    "faze2 priklad"
+                    "speed priklad"
+                    "checkbox priklad"
+                    ". priklad"
+                    "btnAnim btnAnim"
+            }
+        }
+
+        @media only screen and (min-width: 1000px) {
+            .form {
+                max-width: 1240px;
+            }
+
+            .grid {
+                display: grid;
+                height: 640px;
+
+                grid-template-columns: 80% 20%;
+                grid-template-rows: 1fr;
+
+                grid-template-areas:
+                    "image info"
+            }
+
+            .info {
+                margin: 20px;
+                height: 600px;
+
+                grid-template-columns: 98%;
+                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+                grid-template-areas:
+                    "faze1"
+                    "faze2"
+                    "speed"
+                    "checkbox"
+                    "priklad"
+                    "btnAnim"
+            }
+
+        }
+
+        .image {
+            grid-area: image;
+        }
+
+        .editalign {
+            margin: 10px;
+            align-self: center;
+            vertical-align: middle;
+        }
+
+        .faze1 {
+            grid-area: faze1;
+        }
+
+        .faze2 {
+            grid-area: faze2;
+        }
+
+        .rychlost {
+            grid-area: speed;
+        }
+
+        .checkbox {
+            grid-area: checkbox;
+        }
+
+        .example {
+            grid-area: priklad;
+        }
+
+        .btnExample {
+            background-color: darkred;
+            color: yellow;
+
+            vertical-align: middle;
+            align-self: center;
+            justify-self: center;
+
+            margin-top: 15px;
+            margin-right: 5px;
+            margin-left: 5px;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: medium;
+
+            width: 95%;
+            height: 40px;
+            border-radius: 5px;
+        }
+
+        .btnanimace {
+            grid-area: btnAnim;
+
+            background-color: darkblue;
+            color: lightgrey;
+
+            margin: 10px;
+
+            vertical-align: middle;
+            align-self: center;
+            justify-self: center;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: medium;
+            font-weight: bold;
+
+            width: 95%;
+            height: 40px;
+            border-radius: 5px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 class="nadpis">Lissajousovy obrazce</h1>
+
+    <div class="form" id="form">
+
+        <div class="grid" id="grid">
+            <div class="imagec" id="imagec">
+                <canvas class="imageCanvas" id="myCanvas"></canvas>
+            </div>
+
+            <div class="info">
+                <div class="faze1 editalign">
+                    <label for="faze1">Faze 1:</label>
+                    <input id="faze1" type="number" step="1" max="360" min="0" value="42">
+                </div>
+
+                <div class="faze2 editalign">
+                    <label for="faze2">Faze 2:</label>
+                    <input id="faze2" type="number" step="1" max="360" min="0" value="105">
+                </div>
+
+                <div class="rychlost editalign">
+                    <label for="rychlost">Rychlost animace <br /> (zprodleni v ms):</label>
+                    <input id="rychlost" type="number" step="1" max="500" min="0" value="50">
+                </div>
+
+                <button id="btnanimace" class="btnanimace" onclick="onbtnAnimaceclick()">Spust animaci</button>
+
+                <div class="checkbox">
+                    <div class="rotateX editalign">
+                        <input type="checkbox" checked="true" name="rotateX" id="rotateX" onclick="onRotateXclick()">
+                        <label for="rotateX">Rotace v ose X</label>
+                    </div>
+
+                    <div class="rotateY editalign">
+                        <input type="checkbox" checked="true" name="rotateY" id="rotateY" onclick="onRotateYclick()">
+                        <label for="rotateY">Rotace v ose Y</label>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <button class="btnExample" onclick="onbtnExample1click()">Ukázka
+                        1</button>
+                    <button class="btnExample" onclick="onbtnExample2click()">Ukázka
+                        2</button>
+                    <button class="btnExample" onclick="onbtnExample3click()">Ukázka
+                        3</button>
+                    <button class="btnExample" onclick="onbtnExample4click()">Ukázka
+                        4</button>
+                    <button class="btnExample" onclick="onbtnExample5click()">Chyba</button>
+                </div>
+            </div>
+        </div>
+        <script src="lisaj.js"></script>
+
+        <script>
+            let faze1val = 42;
+            let faze2val = 105;
+            let uhelvalX = 0;
+            let uhelvalY = 0;
+            let rychlostval = 50;
+            let rotateX = true;
+            let rotateY = true;
+
+            let idAnimace;
+
+            let posunX = 0;
+            let posunY = 0;
+
+            let canvas = document.getElementById("myCanvas");
+            let contex = canvas.getContext("2d");
+
+            let inputBoxFaze1 = document.querySelector("#faze1");
+            let inputBoxFaze2 = document.querySelector("#faze2");
+            let inputBoxRychlost = document.querySelector("#rychlost");
+            let btnAnimace = document.querySelector("#btnanimace");
+
+            const animaceTxtRun = "Spust animaci";
+            const animaceTxtStop = "Zastav animaci";
+            const animaceTxtDisabled = "Animace zakazana";
+
+            window.onload = function () {
+                drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
+            };
+
+            window.onresize = function () {
+                drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
+            };
+
+            if (inputBoxFaze1 !== null) {
+                inputBoxFaze1.addEventListener("input", function () {
+                    faze1val = this.value;
+                    drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
+                });
+            }
+
+            if (inputBoxFaze2 !== null) {
+                inputBoxFaze2.addEventListener("input", function () {
+                    faze2val = this.value;
+                    drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
+                });
+            }
+
+            if (inputBoxFaze2 !== null) {
+                inputBoxRychlost.addEventListener("input", function () {
+                    rychlostval = Number(this.value);
+
+                    if (idAnimace !== null) {
+                        clearInterval(idAnimace);
+                        idAnimace = setInterval(animace, rychlostval);
+                    }
+
+                    drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
+                });
+            }
+
+            function zakazAnimaci() {
+                stopAnimation();
+                btnAnimace.disabled = true;
+                btnAnimace.textContent = animaceTxtDisabled;
+            }
+
+            function povolAnimaci() {
+                btnAnimace.disabled = false;
+                if (idAnimace == null) {
+                    btnAnimace.textContent = animaceTxtRun;
+                }
+            }
+
+            function stopAnimation() {
+                if (idAnimace !== null) {
+                    clearInterval(idAnimace);
+                    btnAnimace.textContent = animaceTxtRun;
+                    idAnimace = null
+                }
+            }
+
+            function startAnimation() {
+                if (idAnimace == null) {
+                    idAnimace = setInterval(animace, rychlostval);
+                    btnAnimace.textContent = animaceTxtStop;
+                }
+            }
+
+            function animace() {
+
+                if (rotateX == true) {
+                    uhelvalX = uhelvalX + 0.01;
+                    if (uhelvalX % 10 == 0) { uhelvalX = uhelvalX + 0.01 }
+                }
+
+                if (rotateY == true) {
+                    uhelvalY = uhelvalY + 0.01;
+                    if (uhelvalY % 10 == 0) { uhelvalY = uhelvalY + 0.01 }
+                }
+
+                drawImage(faze1val, faze2val, uhelvalX, uhelvalY);
+            }
+
+            function onRotateXclick() {
+                let checkbox = document.querySelector("#rotateX");
+                rotateX = checkbox.checked;
+            }
+
+            function onRotateYclick() {
+                let checkbox = document.querySelector("#rotateY");
+                rotateY = checkbox.checked;
+            }
+
+            function onbtnAnimaceclick() {
+                if (idAnimace == null) {
+                    startAnimation()
+                }
+                else {
+                    stopAnimation()
+                }
+            }
+
+            function onbtnExample1click() {
+                drawImage(46, 69, 0, 0);
+            }
+
+            function onbtnExample2click() {
+                drawImage(92, 69, 0, 0);
+            }
+
+            function onbtnExample3click() {
+                drawImage(52, 65, 0, 0);
+            }
+
+            function onbtnExample4click() {
+                drawImage(206, 46, 0, 0);
+            }
+
+            function onbtnExample5click() {
+                let f1 = 'aaa';
+                drawImage(f1, 49, 0, 0);
+            }
+
+            function wrapText(context, text, x, y, line_width, line_height) {
+                let line = '';
+                let paragraphs = text.split('\n');
+                for (var i = 0; i < paragraphs.length; i++) {
+                    let words = paragraphs[i].split(' ');
+                    for (var n = 0; n < words.length; n++) {
+                        let testLine = line + words[n] + ' ';
+                        let metrics = contex.measureText(testLine);
+                        let testWidth = metrics.width;
+                        if (testWidth > line_width && n > 0) {
+                            contex.fillText(line, x, y);
+                            line = words[n] + ' ';
+                            y += line_height;
+                        }
+                        else {
+                            line = testLine;
+                        }
+                    }
+                    contex.fillText(line, x, y);
+                    y += line_height;
+                    line = '';
+                }
+            }
+
+            function drawErrorMessage(errormessage) {
+
+                zakazAnimaci();
+
+                contex.beginPath();
+                contex.clearRect(0, 0, contex.canvas.width, contex.canvas.height);
+                contex.fillStyle = "red";
+                contex.font = "14px Georgia";
+
+                wrapText(contex, errormessage, 20, 30, contex.canvas.width - 20, 20);
+
+                contex.stroke();
+                contex.closePath();
+            }
+
+            function drawImage(paramfaze1, paramfaze2, paramuhelX, paramuhelY) {
+                let i = 0;
+
+                let widthc = 0;
+                let heightc = 0;
+
+                try {
+                    widthc = document.querySelector('.grid').children[0].clientWidth;
+                } catch (error) {
+                    drawErrorMessage('Class ".grid" nebyla nalezena');
+                    return;
+                }
+
+                try {
+                    heightc = document.querySelector('#form').children[0].clientHeight;
+                } catch (error) {
+                    drawErrorMessage("Identifikator \"#form\" nebyl nalezen ");
+                    return;
+                }
+
+                if (isNaN(paramfaze1)) {
+                    drawErrorMessage('Hodnota parametru "Faze 1" funkce drawImage() "' + paramfaze1 + '" neni ciselna hodnota.\n\nObrazec nebude vykreslen');
+                    return;
+                }
+
+                if (isNaN(paramfaze2)) {
+                    drawErrorMessage('Hodnota parametru "Faze 2" funkce drawImage() "' + paramfaze2 + '" neni ciselna hodnota.\n\nObrazec nebude vykreslen');
+                    return;
+                }
+
+                contex.canvas.width = widthc;
+                contex.canvas.height = heightc;
+
+                if (paramfaze1 !== faze1val) {
+                    faze1val = paramfaze1;
+
+                    let inputBox = document.querySelector("#faze1");
+                    inputBox.value = paramfaze1;
+
+                    if (inputBox == null) {
+                        drawErrorMessage("Identifikator \"#faze1\" nebyl nalezen ");
+                        return;
+                    }
+                }
+
+                if (paramfaze2 !== faze2val) {
+                    faze2val = paramfaze2;
+
+                    let inputBox = document.querySelector("#faze2");
+                    inputBox.value = paramfaze2;
+                    if (inputBox == null) {
+                        drawErrorMessage("Identifikator \"#faze2\" nebyl nalezen ");
+                        return;
+                    }
+                }
+
+                if (paramuhelX !== uhelvalX) {
+                    uhelvalX = paramuhelX;
+                }
+
+                if (paramuhelY !== uhelvalY) {
+                    uhelvalY = paramuhelY;
+                }
+
+                contex.lineWidth = 0.2;
+                contex.strokeStyle = 'green';
+
+                contex.beginPath();
+                contex.clearRect(0, 0, widthc, heightc);
+
+                posunX = Math.trunc((widthc - 20) / 2);
+                posunY = Math.trunc((heightc - 20) / 2);
+
+                while (i < 720) {
+                    i = i + 0.5;
+
+                    x = Math.trunc(Math.sin(i * paramfaze1 + paramuhelY) * posunX + posunX + 10);
+                    y = Math.trunc(Math.cos(i * paramfaze2 + paramuhelX) * posunY + posunY + 10);
+
+                    if (i >= 0.5) {
+                        contex.lineTo(x, y);
+                    }
+                    else {
+                        contex.moveTo(x, y)
+                    }
+                }
+
+                contex.stroke();
+                contex.closePath();
+
+                povolAnimaci();
+            }
+        </script>
+
+
+    </div>
+</body>
+
+</html>
