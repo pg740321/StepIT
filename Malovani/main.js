@@ -130,11 +130,11 @@ loadBtn.addEventListener('click', async () => {
         }],
     };
 
-    const [fileHandle] = await window.showOpenFilePicker(opts);   
+    const [fileHandle] = await window.showOpenFilePicker(opts);
     const fileData = await fileHandle.getFile();
 
-    text = await fileData.text(); 
-    prvky=text.split(',');
+    text = await fileData.text();
+    prvky = text.split(',');
 
     clearScr();
     vykresliprvky();
@@ -291,3 +291,65 @@ window.onload = function () {
     selcolor.value = '#12732F';
     nastavPrvek(1);
 }
+
+window.onkeydown = function (event) {
+
+    if ((!event.altKey) && (!event.ctrlKey) && (!event.shiftKey)) {
+        switch (event.key) {
+            case 'R', 'r': {
+                selcolor.value = '#FF0000';
+                prvekColor = selcolor.value;
+                break;
+            }
+            case 'G', 'g': {
+                selcolor.value = '#00FF00';
+                prvekColor = selcolor.value;
+                break;
+            }
+            case 'B', 'b': {
+                selcolor.value = '#0000FF';
+                prvekColor = selcolor.value;
+                break;
+            }
+        }
+    }
+    else
+        if ((event.altKey) && (!event.ctrlKey) && (!event.shiftKey)) {
+            switch (event.key) {
+                case 'N', 'n': {
+                    newBtn.click();
+                    break;
+                }
+                case 'O', 'o': {
+                    loadBtn.click();
+                    break;
+                }
+                case 'S', 's':
+                    {
+                        saveBtn.click();
+                        break;
+                    }
+
+                case '1': {
+                    rectBtn.click();
+                    break;
+                }
+                case '2': {
+                    arcBtn.click();
+                    break;
+                }
+                case '3': {
+                    lineBtn.click();
+                    break;
+                }
+                case '4': {
+                    ellipseBtn.click();
+                    break;
+                }
+            }
+        }
+
+}
+
+
+
