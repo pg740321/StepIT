@@ -12,8 +12,29 @@ if (cislo<1) or (cislo>100):
   exit();
 
 
+# Prvni moznost reseni
+
+slovo = '';
+
+if (cislo % 3 == 0) :
+    slovo = slovo + 'Fizz';
+
+if (cislo % 5 == 0):
+    slovo = slovo + 'Buzz';
+
+if slovo == '':
+    slovo = str(cislo);
+
+print(slovo);
+
+# ------------------------------------------------------------------------
+
+
+
+# druha moznost reseni
+
 if (cislo % 3 == 0) and (cislo % 5 == 0):
-  print('Fizz Buzz')
+  print('FizzBuzz')
 elif (cislo % 3 == 0):
   print('Fizz')
 elif  (cislo % 5 == 0):
