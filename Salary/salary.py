@@ -28,7 +28,7 @@ class ProdejceClass():
 def vypocet(castka):
     if (castka > 1000):
         return ZAKLADNI_PLAT + castka * 0.08
-    elif (castka >= 500) and castka <= 1000:
+    elif (castka >= 500) and (castka <= 1000):
         return ZAKLADNI_PLAT + castka * 0.05
     else:
         return ZAKLADNI_PLAT + castka * 0.03
