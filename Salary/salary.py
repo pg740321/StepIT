@@ -26,9 +26,9 @@ class ProdejceClass():
 
 
 def vypocet(castka):
-    if castka > 1000:
+    if (castka > 1000):
         return ZAKLADNI_PLAT + castka * 0.08
-    elif castka >= 500 and castka <= 1000:
+    elif (castka >= 500) and castka <= 1000:
         return ZAKLADNI_PLAT + castka * 0.05
     else:
         return ZAKLADNI_PLAT + castka * 0.03
@@ -55,7 +55,7 @@ os.system('cls')
 
 i = 1
 while i <= POCET_PRODEJCU:
-    prodejces = input('Zadejte castku prodeje pro prodejce ' + str(i) + ':')
+    prodejces = input('Zadejte castku prodeje pro "Prodejce ' + str(i) + '":')
     if not prodejces.isnumeric():
         print('Zadany udaj neni cislo !!!!!')
         exit()
