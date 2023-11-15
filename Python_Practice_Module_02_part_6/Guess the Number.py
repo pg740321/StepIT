@@ -18,6 +18,7 @@ hledane_cislo = random.randrange(MINRANGE, MAXRANGE)
 ukoncit = False
 
 while not ukoncit:
+    print('----------------------------------------------------------------------------------------') #odradkovani
     cislos = input(
         f'Zkus uhodnout vygenerované číslo (celočíselné) v rozmezí od {MINRANGE} do {MAXRANGE} :')
 

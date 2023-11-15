@@ -11,6 +11,8 @@ if not cislos.isnumeric():
     print('Zadany udaj neni cislo !!!!!')
 else:
     print() #odradkovani
+    print('-----------------------') #odradkovani
+    print() #odradkovani
 
     cislo = int(cislos)
     pocetznaku = len(str(cislo))
@@ -20,6 +22,9 @@ else:
         print(str(cislo).rjust(pocetznaku),'*',str(i).rjust(2),'=',
            str(cislo*i).rjust(pocetznaku+1))
 
+    print() #odradkovani
+    print('-----------------------') #odradkovani
+    print() #odradkovani
 
 #druhy zpusob vypisu
     for i in range(1,11):
