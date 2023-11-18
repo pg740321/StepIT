@@ -28,9 +28,10 @@ def hotovo():
 
         for i in range(COLCOUNT):
             for j in range(ROWCOUNT):
-                if pole[i][j] != hodnota:
-                    return False
-                hodnota = hodnota + 1
+                if (pole[i][j] != '') :
+                    if (pole[i][j] != hodnota):
+                       return False
+                    hodnota = hodnota + 1
         return True
 
     else:
@@ -52,6 +53,14 @@ def init_hraci_pole():
                 cisla.remove(cislo)
             else:
                 pole[i][j] = ''
+
+#    Odladeni hotovo()
+#    cislo = 1
+#    for i in range(COLCOUNT):
+#        for j in range(ROWCOUNT):
+#            pole[i][j] = cislo
+#            cislo = cislo + 1
+#    pole[COLCOUNT-1][ROWCOUNT-1] = ''
 
 # -------------------------------------------------------------------------------
 
