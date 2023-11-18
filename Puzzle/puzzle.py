@@ -1,3 +1,5 @@
+#    Puzzle
+
 import turtle
 import random
 from tkinter import messagebox
@@ -10,7 +12,7 @@ ZAOBLENI = 5
 BTNWIDTH = 100
 BTNHEIGHT = 100
 
-pole = [['' for i in range(COLCOUNT)] for j in range(ROWCOUNT)]
+pole = [['' for _ in range(ROWCOUNT)] for _ in range(COLCOUNT)]
 
 # -------------------------------------------------------------------------------
 
@@ -18,24 +20,35 @@ pole = [['' for i in range(COLCOUNT)] for j in range(ROWCOUNT)]
 def nova_hra():
     init_hraci_pole()
     hraci_pole()
+    return
 
 # -------------------------------------------------------------------------------
 
 
 def hotovo():
-    if pole[COLCOUNT-1][ROWCOUNT-1] == '':
-        hodnota = 1
+    hodnota = 0
+    ok = False
+    if pole[ROWCOUNT-1][COLCOUNT-1] == '':
+        i = 0
+        ok = True
+        while (ok) and (i < ROWCOUNT):
+            j = 0
+            while (ok) and (j < COLCOUNT):
+                hodnota = hodnota + 1
+                ok = (
+                    (
+                        (i == ROWCOUNT - 1)
+                        and (j == COLCOUNT - 1)
+                        and (pole[i][j] == '')
+                    )
+                    or
+                    (pole[i][j] == hodnota)
+                )
+                j = j+1
 
-        for i in range(COLCOUNT):
-            for j in range(ROWCOUNT):
-                if (pole[i][j] != '') :
-                    if (pole[i][j] != hodnota):
-                       return False
-                    hodnota = hodnota + 1
-        return True
+            i = i+1
 
-    else:
-        return False
+    return ok
 
 # -------------------------------------------------------------------------------
 
@@ -45,8 +58,8 @@ def init_hraci_pole():
     for i in range(1, ROWCOUNT*COLCOUNT):
         cisla.append(i)
 
-    for i in range(COLCOUNT):
-        for j in range(ROWCOUNT):
+    for i in range(ROWCOUNT):
+        for j in range(COLCOUNT):
             if len(cisla) > 0:
                 cislo = random.choice(cisla)
                 pole[i][j] = cislo
@@ -56,8 +69,8 @@ def init_hraci_pole():
 
 #    Odladeni hotovo()
 #    cislo = 1
-#    for i in range(COLCOUNT):
-#        for j in range(ROWCOUNT):
+#    for i in range(ROWCOUNT):
+#        for j in range(COLCOUNT):
 #            pole[i][j] = cislo
 #            cislo = cislo + 1
 #    pole[COLCOUNT-1][ROWCOUNT-1] = ''
@@ -66,14 +79,14 @@ def init_hraci_pole():
 
 
 def hodnota_pole_na_pozici(x, y):
-    ypoz = (screen.window_height() // 2)
-    screen.title(f"{x},{y}")
+    ypoz = screen.window_height() // 2
+    # screen.title(f"{x},{y}")
     for radky in pole:
         if (y <= ypoz) and (y >= ypoz - BTNHEIGHT):
             xpoz = - (screen.window_width() // 2)
             for sloupce in radky:
                 if (x >= xpoz) and (x <= xpoz+BTNWIDTH):
-                    screen.title(f"{sloupce}")
+                    #                   screen.title(f"{sloupce}")
                     return sloupce
                 else:
                     xpoz = xpoz + BTNWIDTH
@@ -92,19 +105,19 @@ def click_na_dlazdici(x, y):
     if (nalezeno != "") and (nalezeno != "-1"):
         # podivam se nahoru, jestli je tam prazdno
         nalezenamezera = hodnota_pole_na_pozici(x, y - BTNHEIGHT)
-        if (nalezenamezera != ""):
+        if nalezenamezera != "":
             # podivam se dolu, jestli je tam prazdno
             nalezenamezera = hodnota_pole_na_pozici(x, y + BTNHEIGHT)
-            if (nalezenamezera != ""):
+            if nalezenamezera != "":
                 # podivam se doleva, jestli je tam prazdno
                 nalezenamezera = hodnota_pole_na_pozici(x - BTNWIDTH, y)
-                if (nalezenamezera != ""):
+                if nalezenamezera != "":
                     # podivam se doprava, jestli je tam prazdno
                     nalezenamezera = hodnota_pole_na_pozici(x + BTNWIDTH, y)
-                    if (nalezenamezera != ""):
+                    if nalezenamezera != "":
                         return
 
-        if (nalezenamezera == ""):
+        if nalezenamezera == "":
             for i in range(COLCOUNT):
                 for j in range(ROWCOUNT):
                     if pole[i][j] == nalezeno:
@@ -165,7 +178,6 @@ def hraci_pole():
             if pole[i][j] != '':
                 vykresli_dlazdici(x, y, str(pole[i][j]))
 
-    # Restore animation
     screen.tracer(1)
 
 # -------------------------------------------------------------------------------
