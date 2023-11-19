@@ -1,8 +1,9 @@
 #    Puzzle
 
-import turtle
+# import turtle
 import random
 from tkinter import messagebox
+from turtle import Turtle, Screen
 
 ROWCOUNT = 4
 COLCOUNT = 4
@@ -75,6 +76,8 @@ def init_hraci_pole():
 #            cislo = cislo + 1
 #    pole[COLCOUNT-1][ROWCOUNT-1] = ''
 
+    return
+
 # -------------------------------------------------------------------------------
 
 
@@ -137,7 +140,7 @@ def click_na_dlazdici(x, y):
 
 
 def vykresli_dlazdici(x, y, text):
-    t = turtle.Turtle()
+    t = Turtle()
     t.hideturtle()
     t.speed(10)
 
@@ -161,6 +164,7 @@ def vykresli_dlazdici(x, y, text):
     t.down()
     t.write(text, align="center", font=("Arial", 30, "bold"))
 
+    return
 # -------------------------------------------------------------------------------
 
 
@@ -180,16 +184,113 @@ def hraci_pole():
 
     screen.tracer(1)
 
+    keyboard_commands()
+    screen.listen()
+    screen.mainloop()
+
+    return
+
 # -------------------------------------------------------------------------------
 
 
-screen = turtle.Screen()
+def posun_pole(kam):
+
+    # Najdu mezeru
+    i = 0
+    j = 0
+    while (i < ROWCOUNT) and (pole[i][j] != ''):
+        j = 0
+        while (j < COLCOUNT) and (pole[i][j] != ''):
+            j = j + 1
+
+        if (j >= COLCOUNT):
+            j = 0
+            i = i + 1
+
+    if (j < COLCOUNT) and (i < ROWCOUNT) and (pole[i][j]) == '':
+        if (kam == "Up"):
+            x = i + 1
+            y = j
+        elif (kam == "Down"):
+            x = i - 1
+            y = j
+        elif (kam == "Left"):
+            x = i
+            y = j + 1
+        elif (kam == "Right"):
+            x = i
+            y = j - 1
+        else:
+            x = -1
+            y = -1
+
+    if (((x >= 0) and (x < COLCOUNT))
+       and ((y >= 0) and (y < ROWCOUNT))):
+        pole[i][j] = pole[x][y]
+        pole[x][y] = ''
+
+        hraci_pole()
+
+    return
+
+# -------------------------------------------------------------------------------
+
+
+def key_arrow_Down():
+    posun_pole('Down')
+    return
+
+# -------------------------------------------------------------------------------
+
+
+def key_arrow_Up():
+    posun_pole('Up')
+    return
+
+# -------------------------------------------------------------------------------
+
+
+def key_arrow_Left():
+    posun_pole('Left')
+    return
+
+# -------------------------------------------------------------------------------
+
+
+def key_arrow_Right():
+    posun_pole('Right')
+    return
+
+# -------------------------------------------------------------------------------
+
+
+def key_Esc():
+    Screen().bye()
+    return
+
+# -------------------------------------------------------------------------------
+
+
+def keyboard_commands():
+    #    screen.onkey(key_Arrow_Up,"w")
+    #    screen.onkey(key_Arrow_Down,"s")
+    #    screen.onkey(key_Arrow_Right,"d")
+    #    screen.onkey(key_Arrow_Left,"a")
+
+    screen.onkey(key_arrow_Up, "Up")
+    screen.onkey(key_arrow_Down, "Down")
+    screen.onkey(key_arrow_Right, "Right")
+    screen.onkey(key_arrow_Left, "Left")
+    screen.onkey(key_Esc, "Escape")
+    return
+
+# -------------------------------------------------------------------------------
+
+
+screen = Screen()
 screen.setup(BTNWIDTH*COLCOUNT + PENSIZE*(COLCOUNT-1),
              BTNHEIGHT*ROWCOUNT + PENSIZE*(COLCOUNT-1))
 screen.title("Puzzle")
 screen.bgcolor("white")
-screen.onclick(click_na_dlazdici)
 
 nova_hra()
-
-turtle.done()
