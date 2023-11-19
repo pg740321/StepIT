@@ -15,6 +15,7 @@ BTNHEIGHT = 100
 
 pole = [['' for _ in range(ROWCOUNT)] for _ in range(COLCOUNT)]
 
+
 # -------------------------------------------------------------------------------
 
 
@@ -23,13 +24,14 @@ def nova_hra():
     hraci_pole()
     return
 
+
 # -------------------------------------------------------------------------------
 
 
 def hotovo():
     hodnota = 0
     ok = False
-    if pole[ROWCOUNT-1][COLCOUNT-1] == '':
+    if pole[ROWCOUNT - 1][COLCOUNT - 1] == '':
         i = 0
         ok = True
         while (ok) and (i < ROWCOUNT):
@@ -45,18 +47,19 @@ def hotovo():
                     or
                     (pole[i][j] == hodnota)
                 )
-                j = j+1
+                j = j + 1
 
-            i = i+1
+            i = i + 1
 
     return ok
+
 
 # -------------------------------------------------------------------------------
 
 
 def init_hraci_pole():
     cisla = []
-    for i in range(1, ROWCOUNT*COLCOUNT):
+    for i in range(1, ROWCOUNT * COLCOUNT):
         cisla.append(i)
 
     for i in range(ROWCOUNT):
@@ -68,15 +71,16 @@ def init_hraci_pole():
             else:
                 pole[i][j] = ''
 
-#    Odladeni hotovo()
-#    cislo = 1
-#    for i in range(ROWCOUNT):
-#        for j in range(COLCOUNT):
-#            pole[i][j] = cislo
-#            cislo = cislo + 1
-#    pole[COLCOUNT-1][ROWCOUNT-1] = ''
+    #    Odladeni hotovo()
+    #    cislo = 1
+    #    for i in range(ROWCOUNT):
+    #        for j in range(COLCOUNT):
+    #            pole[i][j] = cislo
+    #            cislo = cislo + 1
+    #    pole[COLCOUNT-1][ROWCOUNT-1] = ''
 
     return
+
 
 # -------------------------------------------------------------------------------
 
@@ -88,7 +92,7 @@ def hodnota_pole_na_pozici(x, y):
         if (y <= ypoz) and (y >= ypoz - BTNHEIGHT):
             xpoz = - (screen.window_width() // 2)
             for sloupce in radky:
-                if (x >= xpoz) and (x <= xpoz+BTNWIDTH):
+                if (x >= xpoz) and (x <= xpoz + BTNWIDTH):
                     #                   screen.title(f"{sloupce}")
                     return sloupce
                 else:
@@ -97,6 +101,7 @@ def hodnota_pole_na_pozici(x, y):
             ypoz = ypoz - BTNHEIGHT
 
     return "-1"
+
 
 # -------------------------------------------------------------------------------
 
@@ -133,6 +138,7 @@ def click_na_dlazdici(x, y):
             kontrola_vitezstvi()
     return
 
+
 # -------------------------------------------------------------------------------
 
 
@@ -143,7 +149,7 @@ def vykresli_dlazdici(x, y, text):
 
     t.begin_fill()
 
-    t.pen(pencolor="black", fillcolor="DarkGray",  pensize=PENSIZE, speed=9)
+    t.pen(pencolor="black", fillcolor="DarkGray", pensize=PENSIZE, speed=9)
 
     for _ in range(2):
         t.forward(BTNWIDTH - (2 * ZAOBLENI))
@@ -159,33 +165,23 @@ def vykresli_dlazdici(x, y, text):
     t.write(text, align="center", font=("Arial", 30, "bold"))
 
     return
+
+
 # -------------------------------------------------------------------------------
 
 
 def hraci_pole():
+
     screen.tracer(0)
 
     t.hideturtle()
-    t.fillcolor("white")
 
-    t.begin_fill()
-
-    t.penup()
-    t.goto(- screen.window_width() // 2, screen.window_height() // 2)
-    t.pendown()
-
-    for _ in range(2):
-        t.forward(screen.window_width())
-        t.right(90)
-        t.forward(screen.window_height())
-        t.right(90)
-
-    t.end_fill()
+    vykresli_mezeru()
 
     for i in range(COLCOUNT):
         for j in range(ROWCOUNT):
-            x = ((j - (COLCOUNT // 2))*BTNHEIGHT) - PENSIZE + 1
-            y = (((ROWCOUNT // 2) - i - 1)*BTNWIDTH) + PENSIZE - 2
+            x = ((j - (COLCOUNT // 2)) * BTNHEIGHT) - PENSIZE + 1
+            y = (((ROWCOUNT // 2) - i - 1) * BTNWIDTH) + PENSIZE - 2
             if pole[i][j] != '':
                 vykresli_dlazdici(x, y, str(pole[i][j]))
 
@@ -193,11 +189,55 @@ def hraci_pole():
 
     return
 
+
+# -------------------------------------------------------------------------------
+
+def vykresli_mezeru():
+    # Najdu mezeru
+    i = 0
+    j = 0
+
+    while (i < ROWCOUNT) and (pole[i][j] != ''):
+        j = 0
+        while (j < COLCOUNT) and (pole[i][j] != ''):
+            j = j + 1
+
+        if (j >= COLCOUNT):
+            j = 0
+            i = i + 1
+
+    x = - screen.window_width() // 2
+    y = screen.window_height() // 2
+
+    for _ in range(j):
+        x = x + BTNWIDTH
+
+    for _ in range(i):
+        y = y - BTNHEIGHT
+
+    t.hideturtle()
+    t.fillcolor("white")
+
+    t.begin_fill()
+
+    t.penup()
+    t.goto(x - 10, y + 10)
+    t.pendown()
+
+    for _ in range(2):
+        t.forward(BTNWIDTH + 20)
+        t.right(90)
+        t.forward(BTNHEIGHT + 20)
+        t.right(90)
+
+    t.end_fill()
+
+    return
+
 # -------------------------------------------------------------------------------
 
 
 def posun_pole(kam):
-
     # Najdu mezeru
     i = 0
     j = 0
@@ -211,6 +251,9 @@ def posun_pole(kam):
             i = i + 1
 
     if (j < COLCOUNT) and (i < ROWCOUNT) and (pole[i][j]) == '':
+        x = -1
+        y = -1
+
         if (kam == "Up"):
             x = i + 1
             y = j
@@ -223,12 +266,9 @@ def posun_pole(kam):
         elif (kam == "Right"):
             x = i
             y = j - 1
-        else:
-            x = -1
-            y = -1
 
     if (((x >= 0) and (x < COLCOUNT))
-       and ((y >= 0) and (y < ROWCOUNT))):
+            and ((y >= 0) and (y < ROWCOUNT))):
         pole[i][j] = pole[x][y]
         pole[x][y] = ''
 
@@ -237,12 +277,14 @@ def posun_pole(kam):
         kontrola_vitezstvi()
     return
 
+
 # -------------------------------------------------------------------------------
 
 
 def key_arrow_Down():
     posun_pole('Down')
     return
+
 
 # -------------------------------------------------------------------------------
 
@@ -251,12 +293,14 @@ def key_arrow_Up():
     posun_pole('Up')
     return
 
+
 # -------------------------------------------------------------------------------
 
 
 def key_arrow_Left():
     posun_pole('Left')
     return
+
 
 # -------------------------------------------------------------------------------
 
@@ -265,12 +309,14 @@ def key_arrow_Right():
     posun_pole('Right')
     return
 
+
 # -------------------------------------------------------------------------------
 
 
 def key_Esc():
     Screen().bye()
     return
+
 
 # -------------------------------------------------------------------------------
 
@@ -288,6 +334,7 @@ def keyboard_commands():
     screen.onkey(key_Esc, "Escape")
     return
 
+
 # -------------------------------------------------------------------------------
 
 
@@ -300,15 +347,15 @@ def kontrola_vitezstvi():
 
 
 screen = Screen()
-screen.setup(BTNWIDTH*COLCOUNT + PENSIZE*(COLCOUNT-1),
-             BTNHEIGHT*ROWCOUNT + PENSIZE*(COLCOUNT-1)
+screen.setup(BTNWIDTH * COLCOUNT + PENSIZE * (COLCOUNT - 1),
+             BTNHEIGHT * ROWCOUNT + PENSIZE * (COLCOUNT - 1)
              )
 screen.title("Puzzle")
 screen.bgcolor("white")
 
 t = Turtle()
 t.hideturtle()
-t.speed(10)
+t.speed(0)
 
 nova_hra()
 
