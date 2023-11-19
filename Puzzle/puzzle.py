@@ -8,7 +8,7 @@ from turtle import Turtle, Screen
 ROWCOUNT = 4
 COLCOUNT = 4
 PENSIZE = 5
-ZAOBLENI = 5
+ZAOBLENI = 4
 
 BTNWIDTH = 100
 BTNHEIGHT = 100
@@ -69,12 +69,12 @@ def init_hraci_pole():
                 pole[i][j] = ''
 
 #    Odladeni hotovo()
-#    cislo = 1
-#    for i in range(ROWCOUNT):
-#        for j in range(COLCOUNT):
-#            pole[i][j] = cislo
-#            cislo = cislo + 1
-#    pole[COLCOUNT-1][ROWCOUNT-1] = ''
+    cislo = 1
+    for i in range(ROWCOUNT):
+        for j in range(COLCOUNT):
+            pole[i][j] = cislo
+            cislo = cislo + 1
+    pole[COLCOUNT-1][ROWCOUNT-1] = ''
 
     return
 
@@ -130,38 +130,32 @@ def click_na_dlazdici(x, y):
 
             hraci_pole()
 
-            if hotovo() == True:
-                messagebox.showinfo("Puzzle", "Vyhrál jsi")
-                nova_hra()
-
+            kontrola_vitezstvi()
     return
 
 # -------------------------------------------------------------------------------
 
 
 def vykresli_dlazdici(x, y, text):
-    t = Turtle()
-    t.hideturtle()
-    t.speed(10)
-
-    t.up()
+    t.penup()
     t.goto(x + PENSIZE * 2 - ZAOBLENI, y)
-    t.down()
+    t.pendown()
 
     t.begin_fill()
+
     t.pen(pencolor="black", fillcolor="DarkGray",  pensize=PENSIZE, speed=9)
 
     for _ in range(2):
-        t.fd(BTNWIDTH-2*ZAOBLENI)
+        t.forward(BTNWIDTH - (2 * ZAOBLENI))
         t.circle(ZAOBLENI, 90)
-        t.fd(BTNHEIGHT-2*ZAOBLENI)
+        t.forward(BTNHEIGHT - (2 * ZAOBLENI))
         t.circle(ZAOBLENI, 90)
 
     t.end_fill()
 
-    t.up()
+    t.penup()
     t.goto(x + BTNWIDTH // 2, y + BTNHEIGHT // 2 - 20)
-    t.down()
+    t.pendown()
     t.write(text, align="center", font=("Arial", 30, "bold"))
 
     return
@@ -169,11 +163,24 @@ def vykresli_dlazdici(x, y, text):
 
 
 def hraci_pole():
-    screen.clearscreen()
-    screen.resetscreen()
-    screen.bgcolor("white")
-    screen.onclick(click_na_dlazdici)
     screen.tracer(0)
+
+    t.hideturtle()
+    t.fillcolor("white")
+
+    t.begin_fill()
+
+    t.penup()
+    t.goto(- screen.window_width() // 2, screen.window_height() // 2)
+    t.pendown()
+
+    for _ in range(2):
+        t.forward(screen.window_width())
+        t.right(90)
+        t.forward(screen.window_height())
+        t.right(90)
+
+    t.end_fill()
 
     for i in range(COLCOUNT):
         for j in range(ROWCOUNT):
@@ -183,10 +190,6 @@ def hraci_pole():
                 vykresli_dlazdici(x, y, str(pole[i][j]))
 
     screen.tracer(1)
-
-    keyboard_commands()
-    screen.listen()
-    screen.mainloop()
 
     return
 
@@ -231,6 +234,7 @@ def posun_pole(kam):
 
         hraci_pole()
 
+        kontrola_vitezstvi()
     return
 
 # -------------------------------------------------------------------------------
@@ -287,10 +291,28 @@ def keyboard_commands():
 # -------------------------------------------------------------------------------
 
 
+def kontrola_vitezstvi():
+    if hotovo() == True:
+        messagebox.showinfo("Puzzle", "Vyhrál jsi")
+        nova_hra()
+
+# -------------------------------------------------------------------------------
+
+
 screen = Screen()
 screen.setup(BTNWIDTH*COLCOUNT + PENSIZE*(COLCOUNT-1),
-             BTNHEIGHT*ROWCOUNT + PENSIZE*(COLCOUNT-1))
+             BTNHEIGHT*ROWCOUNT + PENSIZE*(COLCOUNT-1)
+             )
 screen.title("Puzzle")
 screen.bgcolor("white")
 
+t = Turtle()
+t.hideturtle()
+t.speed(10)
+
 nova_hra()
+
+keyboard_commands()
+screen.onclick(click_na_dlazdici)
+screen.listen()
+screen.mainloop()
