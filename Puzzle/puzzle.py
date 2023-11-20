@@ -33,13 +33,13 @@ def init_hraci_pole():
         pole.append(cislo)
         cisla.remove(cislo)
 
-    pole.append('')
+    pole.append("")
 
     # Odladeni hotovo()
-    pole.clear()
-    for i in range(1, ROWCOUNT * COLCOUNT):
-        pole.append(i)
-    pole.append('')
+#    pole.clear()
+#    for i in range(1, ROWCOUNT * COLCOUNT):
+#        pole.append(i)
+#    pole.append("")
 
     return
 
@@ -75,7 +75,7 @@ def vykresli_dlazdici(x, y, text):
 
     t.begin_fill()
 
-    if text == '':
+    if text == "":
         t.pen(pencolor="white", fillcolor="white", pensize=PENSIZE, speed=9)
     else:
         t.pen(pencolor="black", fillcolor="DarkGray", pensize=PENSIZE, speed=9)
@@ -110,9 +110,7 @@ def hraci_pole():
         radek = i // COLCOUNT + 1
         y = (screen.window_height() // 2) - radek * BTNHEIGHT
 
-#        if pole[i] != '':
         vykresli_dlazdici(x, y, str(pole[i]))
-
     return
 
 # -------------------------------------------------------------------------------
@@ -170,25 +168,25 @@ def click_na_dlazdici(x, y):
     # mezara dole
     if (radek + 1) < ROWCOUNT:
         index = ((radek + 1) * COLCOUNT) + sloupec
-        if pole[index] == '':
+        if pole[index] == "":
             mezera = index
 
     # mezara nahore
     if (mezera == -1) and (radek > 0):
         index = ((radek - 1) * COLCOUNT) + sloupec
-        if pole[index] == '':
+        if pole[index] == "":
             mezera = index
 
     # mezara vpravo
     if (mezera == -1) and ((sloupec + 1) < COLCOUNT):
         index = (radek * COLCOUNT) + sloupec + 1
-        if pole[index] == '':
+        if pole[index] == "":
             mezera = index
 
     # mezara vpravo
     if (mezera == -1) and (sloupec > 0):
         index = (radek * COLCOUNT) + sloupec - 1
-        if pole[index] == '':
+        if pole[index] == "":
             mezera = index
 
     if (mezera > -1):
@@ -207,7 +205,7 @@ def click_na_dlazdici(x, y):
 def posun_pole(kam):
     # Najdu mezeru
 
-    mezera = pole.index('')
+    mezera = pole.index("")
 
     sloupec = mezera % COLCOUNT
     radek = mezera // COLCOUNT
@@ -307,7 +305,7 @@ screen.bgcolor("white")
 
 t = Turtle()
 t.hideturtle()
-t.speed(0)
+t.speed(9)
 
 nova_hra()
 
