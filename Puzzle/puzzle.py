@@ -1,3 +1,5 @@
+# Puzzle #
+
 import random
 from tkinter import messagebox
 from turtle import Turtle, Screen
@@ -12,15 +14,15 @@ BTNHEIGHT = 100
 
 pole = []
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def nova_hra():
     init_hraci_pole()
-    hraci_pole()
+    vykresli_hraci_pole()
     return
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def init_hraci_pole():
@@ -35,35 +37,40 @@ def init_hraci_pole():
 
     pole.append("")
 
-    # Odladeni hotovo()
-#    pole.clear()
-#    for i in range(1, ROWCOUNT * COLCOUNT):
-#        pole.append(i)
-#    pole.append("")
+    # Odladeni hotovo() #
+    #    pole.clear()#
+    #    for i in range(1, ROWCOUNT * COLCOUNT):#
+    #        pole.append(i)#
+    #    pole.append("")#
 
     return
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def hotovo():
     i = 0
     ok = True
-    while (ok) and (i < len(pole) - 1):  # posledni prvek je mezera, kterou nebudu kontrolovat
-        ok = (pole[i] == i + 1)
+
+    # posledni prvek je mezera, kterou nebudu kontrolovat #
+    while ok and (i < len(pole) - 1):
+        if pole[i] == i + 1:
+            ok = True
+        else:
+            ok = False
         i = i + 1
 
     return ok
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def kontrola_vitezstvi():
-    if hotovo() == True:
+    if hotovo():
         messagebox.showinfo("Puzzle", "Vyhrál jsi")
         nova_hra()
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def vykresli_dlazdici(x, y, text):
@@ -97,13 +104,11 @@ def vykresli_dlazdici(x, y, text):
 
     return
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
-def hraci_pole():
-    radek = 0
+def vykresli_hraci_pole():
     for i in range(ROWCOUNT * COLCOUNT):
-
         sloupec = i % COLCOUNT
         x = (- screen.window_width() // 2) + sloupec * BTNWIDTH + 9
 
@@ -113,7 +118,7 @@ def hraci_pole():
         vykresli_dlazdici(x, y, str(pole[i]))
     return
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def vykresli_pole(index):
@@ -125,13 +130,10 @@ def vykresli_pole(index):
 
     vykresli_dlazdici(x, y, str(pole[index]))
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def index_pole_na_pozici(x, y):
-
-    ypoz = screen.window_height() // 2
-
     for i in range(ROWCOUNT * COLCOUNT + 1):
         sloupec = i % COLCOUNT
         xpoz = (- screen.window_width() // 2) + sloupec * BTNWIDTH
@@ -145,17 +147,17 @@ def index_pole_na_pozici(x, y):
 
     return -1
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def hodnota_pole_na_pozici(x, y):
     index = index_pole_na_pozici(x, y)
     if index > -1:
-        return pole[i]
+        return pole[index]
     else:
         return -1
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def click_na_dlazdici(x, y):
@@ -189,7 +191,7 @@ def click_na_dlazdici(x, y):
         if pole[index] == "":
             mezera = index
 
-    if (mezera > -1):
+    if mezera > -1:
         pole[mezera] = pole[nalezeno]
         pole[nalezeno] = ""
 
@@ -199,7 +201,7 @@ def click_na_dlazdici(x, y):
         kontrola_vitezstvi()
     return
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def posun_pole(kam):
@@ -227,7 +229,7 @@ def posun_pole(kam):
     if (kam == "Right") and (sloupec > 0):
         index = (radek * COLCOUNT) + sloupec - 1
 
-    if (index > -1):
+    if index > -1:
         pole[mezera] = pole[index]
         pole[index] = ""
 
@@ -237,47 +239,45 @@ def posun_pole(kam):
         kontrola_vitezstvi()
     return
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
-def key_arrow_Down():
+def key_arrow_down():
     posun_pole('Down')
     return
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
-def key_arrow_Up():
+def key_arrow_up():
     posun_pole('Up')
     return
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
-def key_arrow_Left():
+def key_arrow_left():
     posun_pole('Left')
     return
 
+# --------------------------------------------------------------------------- #
 
-# -------------------------------------------------------------------------------
 
-
-def key_arrow_Right():
+def key_arrow_right():
     posun_pole('Right')
     return
 
-
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def key_Esc():
     if (messagebox.askquestion("Puzzle",
                                "Ukončit ?",
                                icon='question') == 'yes'):
-        Screen().bye()
+        screen.bye()
     return
 
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- #
 
 
 def keyboard_commands():
@@ -286,30 +286,31 @@ def keyboard_commands():
     #    screen.onkey(key_Arrow_Right,"d")
     #    screen.onkey(key_Arrow_Left,"a")
 
-    screen.onkey(key_arrow_Up, "Up")
-    screen.onkey(key_arrow_Down, "Down")
-    screen.onkey(key_arrow_Right, "Right")
-    screen.onkey(key_arrow_Left, "Left")
+    screen.onkey(key_arrow_up, "Up")
+    screen.onkey(key_arrow_down, "Down")
+    screen.onkey(key_arrow_right, "Right")
+    screen.onkey(key_arrow_left, "Left")
     screen.onkey(key_Esc, "Escape")
     return
 
+# --------------------------------------------------------------------------- #
 
-# -------------------------------------------------------------------------------
 
-screen = Screen()
-screen.setup(BTNWIDTH * COLCOUNT + PENSIZE * (COLCOUNT - 1) + 2,
-             BTNHEIGHT * ROWCOUNT + PENSIZE * (COLCOUNT - 1) + 2
-             )
-screen.title("Puzzle")
-screen.bgcolor("white")
+if __name__ == '__main__':
+    screen = Screen()
+    screen.setup(BTNWIDTH * COLCOUNT + PENSIZE * (COLCOUNT - 1) + 2,
+                 BTNHEIGHT * ROWCOUNT + PENSIZE * (COLCOUNT - 1) + 2
+                 )
+    screen.title("Puzzle")
+    screen.bgcolor("white")
 
-t = Turtle()
-t.hideturtle()
-t.speed(9)
+    t = Turtle()
+    t.hideturtle()
+    t.speed(9)
 
-nova_hra()
+    nova_hra()
 
-keyboard_commands()
-screen.onclick(click_na_dlazdici)
-screen.listen()
-screen.mainloop()
+    keyboard_commands()
+    screen.onclick(click_na_dlazdici)
+    screen.listen()
+    screen.mainloop()
