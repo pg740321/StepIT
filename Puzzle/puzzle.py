@@ -110,10 +110,10 @@ def vykresli_dlazdici(x, y, text):
 def vykresli_hraci_pole():
     for i in range(ROWCOUNT * COLCOUNT):
         sloupec = i % COLCOUNT
-        x = (- screen.window_width() // 2) + sloupec * BTNWIDTH + 9
+        x = (- screen_width // 2) + sloupec * BTNWIDTH + 9
 
         radek = i // COLCOUNT + 1
-        y = (screen.window_height() // 2) - radek * BTNHEIGHT
+        y = (screen_height // 2) - radek * BTNHEIGHT
 
         vykresli_dlazdici(x, y, str(pole[i]))
     return
@@ -123,10 +123,10 @@ def vykresli_hraci_pole():
 
 def vykresli_pole(index):
     sloupec = index % COLCOUNT
-    x = (- screen.window_width() // 2) + sloupec * BTNWIDTH + 9
+    x = (- screen_width // 2) + sloupec * BTNWIDTH + 9
 
     radek = index // COLCOUNT + 1
-    y = (screen.window_height() // 2) - radek * BTNHEIGHT
+    y = (screen_height // 2) - radek * BTNHEIGHT
 
     vykresli_dlazdici(x, y, str(pole[index]))
 
@@ -136,10 +136,10 @@ def vykresli_pole(index):
 def index_pole_na_pozici(x, y):
     for i in range(ROWCOUNT * COLCOUNT + 1):
         sloupec = i % COLCOUNT
-        xpoz = (- screen.window_width() // 2) + sloupec * BTNWIDTH
+        xpoz = (- screen_width // 2) + sloupec * BTNWIDTH
 
         radek = i // COLCOUNT
-        ypoz = (screen.window_height() // 2) - radek * BTNHEIGHT
+        ypoz = (screen_height // 2) - radek * BTNHEIGHT
 
         if (xpoz <= x) and (x <= (xpoz + BTNWIDTH)):
             if (ypoz >= y) and (y >= ypoz - BTNHEIGHT):
@@ -298,9 +298,11 @@ def keyboard_commands():
 
 if __name__ == '__main__':
     screen = Screen()
-    screen.setup(BTNWIDTH * COLCOUNT + PENSIZE * (COLCOUNT - 1) + 2,
-                 BTNHEIGHT * ROWCOUNT + PENSIZE * (COLCOUNT - 1) + 2
-                 )
+
+    screen_width = BTNWIDTH * COLCOUNT + PENSIZE * (COLCOUNT - 1) + 2
+    screen_height = BTNHEIGHT * ROWCOUNT + PENSIZE * (COLCOUNT - 1) + 2
+    screen.setup(screen_width, screen_height)
+
     screen.title("Puzzle")
     screen.bgcolor("white")
 
