@@ -30,6 +30,7 @@ def init_hraci_pole():
     for i in range(1, ROWCOUNT * COLCOUNT):
         cisla.append(i)
 
+    pole.clear()
     while len(cisla) > 0:
         cislo = random.choice(cisla)
         pole.append(cislo)
