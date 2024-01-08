@@ -23,11 +23,13 @@ print(' ')
 print(' ========================================================  ')
 print(' 0b.) To samé jako 0a, ale lichá čísla z nového seznamu vypadnou.')
 
+seznamciselsuda = []
 for cislo in seznamciselplus3:
-    if (cislo % 2 != 0):
-        seznamciselplus3.remove(cislo)
+    if (cislo % 2 == 0):
+        seznamciselsuda += [cislo]
 
 print(seznamciselplus3)
+print(seznamciselsuda)
 
 print(' ')
 print(' ========================================================  ')
@@ -63,7 +65,7 @@ def tretimocnina(cisla):
 
     return seznamciselmocnina3
 
-
+print(seznamcisel)
 print(tretimocnina(seznamcisel))
 
 
@@ -75,13 +77,14 @@ print('# vytvoří z nich řetězce.')
 seznamciselstr = []
 for cislo in seznamcisel:
     seznamciselstr += [str(cislo)]
+print(seznamcisel)
 print(seznamciselstr)
 
 print(' ')
 print(' ========================================================  ')
 print('# 2b.) Vytvoří řetězce jen z těch čísel, co jsou menší než 15.')
 
-cislamensi15 = [cislo for cislo in seznamcisel if cislo < 15]
+cislamensi15 = [str(cislo) for cislo in seznamcisel if cislo < 15]
 print(seznamcisel)
 print(cislamensi15)
 
@@ -133,4 +136,6 @@ CzechToEng = {
 
 EngToCzech = {}
 EngToCzech.update({e: c for (c, e) in CzechToEng.items()})
+
+print(CzechToEng)
 print(EngToCzech)
